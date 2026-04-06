@@ -1,2 +1,4 @@
-# Minesweeper
+# minesweeper
+
 Multiplatform minesweeper game with random generated game area
+
