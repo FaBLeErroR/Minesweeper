@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:minesweeper/l10n/app_localizations.dart';
-import 'package:minesweeper/screens/menu/cubit/menu_cubit.dart';
+import 'package:minesweeper/screens/game_area/cubit/game_area_cubit.dart';
 import 'package:minesweeper/ui/ui.dart';
 
-import 'cubit/menu_state.dart';
+import 'cubit/game_area_state.dart';
 
-class MenuView extends StatelessWidget {
-  const MenuView({super.key});
+class GameAreaView extends StatelessWidget {
+  const GameAreaView({super.key});
 
   @override
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context)!;
 
-    return BlocBuilder<MenuCubit, MenuState>(
+    return BlocBuilder<GameAreaCubit, GameAreaState>(
       builder: (_, state) {
         return Scaffold(
-          appBar: AppBar(actionsPadding: EdgeInsets.only(right: 16), title: Text(localization.menuTitle)),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Center(
