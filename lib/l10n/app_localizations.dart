@@ -99,6 +99,30 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Меню'**
   String get menuTitle;
+
+  /// No description provided for @start.
+  ///
+  /// In ru, this message translates to:
+  /// **'Начать'**
+  String get start;
+
+  /// No description provided for @game.
+  ///
+  /// In ru, this message translates to:
+  /// **'Игра'**
+  String get game;
+
+  /// No description provided for @settings.
+  ///
+  /// In ru, this message translates to:
+  /// **'Настройки'**
+  String get settings;
+
+  /// No description provided for @exit.
+  ///
+  /// In ru, this message translates to:
+  /// **'Выход'**
+  String get exit;
 }
 
 class _AppLocalizationsDelegate

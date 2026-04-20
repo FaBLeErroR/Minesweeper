@@ -1,3 +1,7 @@
 {
-  "menuTitle": "Меню"
+  "menuTitle": "Меню",
+  "start": "Начать",
+  "game": "Игра",
+  "settings": "Настройки",
+  "exit": "Выход"
 }

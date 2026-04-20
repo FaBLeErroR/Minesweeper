@@ -10,4 +10,16 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get menuTitle => 'Меню';
+
+  @override
+  String get start => 'Начать';
+
+  @override
+  String get game => 'Игра';
+
+  @override
+  String get settings => 'Настройки';
+
+  @override
+  String get exit => 'Выход';
 }

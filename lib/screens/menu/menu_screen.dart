@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:minesweeper/navigation/app_navigator.dart';
 import 'package:minesweeper/screens/menu/cubit/menu_cubit.dart';
 import 'package:minesweeper/screens/menu/menu_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,6 +12,9 @@ class MenuScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<MenuCubit>(create: (_) => MenuCubit(), child: MenuView());
+    return BlocProvider<MenuCubit>(
+      create: (_) => MenuCubit(navigator: GetIt.instance<AppNavigator>()),
+      child: MenuView(),
+    );
   }
 }

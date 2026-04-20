@@ -12,6 +12,7 @@ class MenuView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context)!;
+    final bloc = BlocProvider.of<MenuCubit>(context);
 
     return BlocBuilder<MenuCubit, MenuState>(
       builder: (_, state) {
@@ -24,7 +25,7 @@ class MenuView extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Center(
-                    child: UiButton(onPressed: () {}, text: 'Начать'),
+                    child: UiButton(onPressed: bloc.navigateToGame, text: localization.start),
                   ),
                 ],
               ),
