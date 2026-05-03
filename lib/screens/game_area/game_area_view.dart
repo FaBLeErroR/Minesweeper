@@ -22,28 +22,34 @@ class GameAreaView extends StatelessWidget {
 
         return Scaffold(
           body: Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: GridView.builder(
-                shrinkWrap: true,
-                itemCount: state.field.width * state.field.height,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: state.field.width),
-                itemBuilder: (context, index) {
-                  final x = index ~/ state.field.width;
-                  final y = index % state.field.width;
+            child: InteractiveViewer(
+              minScale: 0.1,
+              maxScale: 4.0,
+              child: SizedBox(
+                width: state.field.width * 40,
+                height: state.field.height * 40,
+                child: GridView.builder(
+                  shrinkWrap: true,
+                  itemCount: state.field.width * state.field.height,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: state.field.width),
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    final x = index ~/ state.field.width;
+                    final y = index % state.field.width;
 
-                  final cell = state.field.field[x][y];
+                    final cell = state.field.field[x][y];
 
-                  return GestureDetector(
-                    onTap: () => bloc.openCell(x, y),
-                    onLongPress: () => bloc.markCell(x, y),
-                    child: Container(
-                      margin: EdgeInsets.all(2),
-                      color: cell.isOpen ? Colors.grey : Colors.blue,
-                      child: Center(child: _buildCellContent(cell)),
-                    ),
-                  );
-                },
+                    return GestureDetector(
+                      onTap: () => bloc.openCell(x, y),
+                      onLongPress: () => bloc.markCell(x, y),
+                      child: Container(
+                        margin: EdgeInsets.all(2),
+                        color: cell.isOpen ? Colors.grey : Colors.blue,
+                        child: Center(child: _buildCellContent(cell)),
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
           ),

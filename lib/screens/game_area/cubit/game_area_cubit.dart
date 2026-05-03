@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:minesweeper/domain/entity/cell.dart';
 import 'package:minesweeper/domain/entity/game_field.dart';
 import 'package:minesweeper/domain/use_case/init_game_field_use_case.dart';
 import 'package:minesweeper/domain/use_case/mark_cell_use_case.dart';
@@ -27,13 +28,17 @@ class GameAreaCubit extends Cubit<GameAreaState> {
   }
 
   Future<void> _init() async {
-    GameField field = _initUseCase(10, 10);
+    GameField field = _initUseCase(15, 15);
     emit(state.copyWith(field: field, isLoading: false));
   }
 
   void openCell(int x, int y) {
     GameField field = _openUseCase(state.field, x, y);
     emit(state.copyWith(field: field));
+
+    if (state.field.field[x][y].type == CellType.mine) {
+      _goToGameOver();
+    }
   }
 
   void markCell(int x, int y) {
@@ -41,7 +46,11 @@ class GameAreaCubit extends Cubit<GameAreaState> {
     emit(state.copyWith(field: field));
   }
 
-  void pop() {
+  void _pop() {
     _navigator.pop();
+  }
+
+  void _goToGameOver() {
+    _navigator.goToGameOver();
   }
 }

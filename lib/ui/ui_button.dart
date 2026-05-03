@@ -2,18 +2,20 @@ import 'package:flutter/material.dart';
 
 final class UiButton extends StatefulWidget {
   final VoidCallback onPressed;
-  final String text;
+  final Widget child;
   final bool isLoading;
   final double? width;
   final double? height;
+  final ButtonStyle? style;
 
   const UiButton({
     super.key,
     required this.onPressed,
-    required this.text,
+    required this.child,
     this.isLoading = false,
     this.width,
     this.height,
+    this.style,
   });
 
   @override
@@ -26,7 +28,7 @@ class _UiButtonState extends State<UiButton> {
     return SizedBox(
       height: widget.height ?? 50,
       width: widget.width ?? double.infinity,
-      child: ElevatedButton(onPressed: widget.onPressed, child: Text(widget.text)),
+      child: ElevatedButton(style: widget.style, onPressed: widget.onPressed, child: widget.child),
     );
   }
 }

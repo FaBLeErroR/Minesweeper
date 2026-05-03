@@ -10,7 +10,13 @@ class AppNavigator {
   }
 
   void goToMenu() {
-    router.popUntilRouteWithName(MenuScreenRoute().routeName);
+    router.popUntilRoot();
+
+    router.replace(MenuScreenRoute());
+  }
+
+  void goToGameOver() {
+    router.replace(GameOverScreenRoute());
   }
 
   void pop() {

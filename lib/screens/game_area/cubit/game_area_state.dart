@@ -6,8 +6,15 @@ class GameAreaState extends Equatable {
   final bool hasError;
   final String? errorMessage;
   final GameField field;
+  final bool isFirstTap;
 
-  const GameAreaState({this.isLoading = false, this.hasError = false, this.errorMessage, required this.field});
+  const GameAreaState({
+    this.isLoading = false,
+    this.hasError = false,
+    this.errorMessage,
+    required this.field,
+    this.isFirstTap = true,
+  });
 
   // Factory для начального состояния
   factory GameAreaState.initial() {

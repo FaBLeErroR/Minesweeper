@@ -25,7 +25,7 @@ class MenuView extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Center(
-                    child: UiButton(onPressed: bloc.navigateToGame, text: localization.start),
+                    child: UiButton(onPressed: bloc.navigateToGame, child: Text(localization.start)),
                   ),
                 ],
               ),

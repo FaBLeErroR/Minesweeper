@@ -47,3 +47,6 @@ app.*.map.json
 *.g.dart
 *.gr.dart
 *.lock
+
+/lib/l10n/app_localizations.dart
+/lib/l10n/app_localizations_ru.dart
