@@ -28,7 +28,7 @@ class GameAreaCubit extends Cubit<GameAreaState> {
   }
 
   Future<void> _init() async {
-    GameField field = _initUseCase(15, 15);
+    GameField field = _initUseCase(20, 20);
     emit(state.copyWith(field: field, isLoading: false));
   }
 

@@ -21,37 +21,49 @@ class GameAreaView extends StatelessWidget {
         if (state.isLoading) return Center(child: CircularProgressIndicator());
 
         return Scaffold(
-          body: Center(
-            child: InteractiveViewer(
-              minScale: 0.1,
-              maxScale: 4.0,
-              child: SizedBox(
-                width: state.field.width * 40,
-                height: state.field.height * 40,
-                child: GridView.builder(
-                  shrinkWrap: true,
-                  itemCount: state.field.width * state.field.height,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: state.field.width),
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    final x = index ~/ state.field.width;
-                    final y = index % state.field.width;
+          body: Column(
+            mainAxisSize: .min,
+            children: [
+              InteractiveViewer(
+                maxScale: 10.0,
+                child: SizedBox(
+                  width: state.field.width * 40,
+                  height: state.field.height * 40,
+                  child: Center(
+                    child: GridView.builder(
+                      shrinkWrap: true,
+                      itemCount: state.field.width * state.field.height,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: state.field.width),
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        final x = index ~/ state.field.width;
+                        final y = index % state.field.width;
 
-                    final cell = state.field.field[x][y];
+                        final cell = state.field.field[x][y];
 
-                    return GestureDetector(
-                      onTap: () => bloc.openCell(x, y),
-                      onLongPress: () => bloc.markCell(x, y),
-                      child: Container(
-                        margin: EdgeInsets.all(2),
-                        color: cell.isOpen ? Colors.grey : Colors.blue,
-                        child: Center(child: _buildCellContent(cell)),
-                      ),
-                    );
-                  },
+                        if (cell.type == .empty) {
+                          return const SizedBox.shrink();
+                        }
+
+                        return GestureDetector(
+                          onTap: () => bloc.openCell(x, y),
+                          onLongPress: () => bloc.markCell(x, y),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: cell.isOpen ? Colors.grey : Colors.blue,
+                              borderRadius: BorderRadius.circular(2),
+                            ),
+                            margin: .all(1),
+                            alignment: .center,
+                            child: _buildCellContent(cell),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
         );
       },
@@ -63,7 +75,7 @@ class GameAreaView extends StatelessWidget {
       return cell.isMarked ? Icon(Icons.flag) : SizedBox();
     }
 
-    if (cell.type == CellType.mine) {
+    if (cell.type == .mine) {
       return Icon(Icons.close);
     }
 

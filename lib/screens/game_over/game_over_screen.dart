@@ -37,20 +37,10 @@ class GameOverView extends StatelessWidget {
               mainAxisAlignment: .center,
               children: [
                 Expanded(
-                  child: UiButton(
-                    onPressed: () => navigator.goToMenu(),
-                    child: Text(localization.inMenu),
-                  ),
+                  child: UiButton(onPressed: () => navigator.goToMenu(), child: Text(localization.inMenu)),
                 ),
                 SizedBox(width: 8),
-                UiButton(
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                  ),
-                  onPressed: () => navigator.goToGame(),
-                  width: 48,
-                  child: Icon(Icons.restart_alt),
-                ),
+                UiButton(padding: 0, onPressed: () => navigator.goToGame(), width: 48, child: Icon(Icons.restart_alt)),
               ],
             ),
           ],

@@ -6,7 +6,7 @@ final class UiButton extends StatefulWidget {
   final bool isLoading;
   final double? width;
   final double? height;
-  final ButtonStyle? style;
+  final double? padding;
 
   const UiButton({
     super.key,
@@ -15,7 +15,7 @@ final class UiButton extends StatefulWidget {
     this.isLoading = false,
     this.width,
     this.height,
-    this.style,
+    this.padding,
   });
 
   @override
@@ -28,7 +28,14 @@ class _UiButtonState extends State<UiButton> {
     return SizedBox(
       height: widget.height ?? 50,
       width: widget.width ?? double.infinity,
-      child: ElevatedButton(style: widget.style, onPressed: widget.onPressed, child: widget.child),
+      child: ElevatedButton(
+        style: ButtonStyle(
+          shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(6))),
+          padding: (widget.padding != null) ? .all(.all(widget.padding ?? 0)) : null,
+        ),
+        onPressed: widget.onPressed,
+        child: widget.child,
+      ),
     );
   }
 }
