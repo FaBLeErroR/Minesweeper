@@ -9,12 +9,7 @@ import 'package:minesweeper/theme/theme_provider.dart';
 void main() {
   initDependencies();
 
-  runApp(
-    ChangeNotifierProvider(
-      create: (context) => ThemeProvider(),
-      child: MyApp(),
-    ),
-  );
+  runApp(ChangeNotifierProvider(create: (context) => ThemeProvider(), child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -24,8 +19,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-
     return MaterialApp.router(
       localizationsDelegates: AppLocalizations.localizationsDelegates,
 
@@ -33,7 +26,7 @@ class MyApp extends StatelessWidget {
 
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
-      themeMode: themeProvider.themeMode,
+      themeMode: ThemeMode.system,
 
       locale: const Locale('ru'),
       routerConfig: _appRouter.config(),

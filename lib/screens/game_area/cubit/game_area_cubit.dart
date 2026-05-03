@@ -46,7 +46,19 @@ class GameAreaCubit extends Cubit<GameAreaState> {
     emit(state.copyWith(field: field));
   }
 
-  void _pop() {
+  int getFlags() {
+    return state.field.flags;
+  }
+
+  int getMines() {
+    return state.field.mines;
+  }
+
+  void restart() {
+    _init();
+  }
+
+  void pop() {
     _navigator.pop();
   }
 
