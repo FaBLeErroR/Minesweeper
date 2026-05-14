@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:minesweeper/domain/entity/cell.dart';
 import 'package:minesweeper/domain/entity/game_field.dart';
+import 'package:minesweeper/domain/use_case/finish_game_use_case.dart';
 import 'package:minesweeper/domain/use_case/init_game_field_use_case.dart';
 import 'package:minesweeper/domain/use_case/mark_cell_use_case.dart';
 import 'package:minesweeper/domain/use_case/open_cell_use_case.dart';
@@ -13,16 +14,19 @@ class GameAreaCubit extends Cubit<GameAreaState> {
   final InitGameFieldUseCase _initUseCase;
   final OpenCellUseCase _openUseCase;
   final MarkCellUseCase _markUseCase;
+  final FinishGameUseCase _finishGameUseCase;
 
   GameAreaCubit({
     required AppNavigator navigator,
     required InitGameFieldUseCase initUseCase,
     required OpenCellUseCase openUseCase,
     required MarkCellUseCase markUseCase,
+    required FinishGameUseCase finishGameUseCase,
   }) : _navigator = navigator,
        _initUseCase = initUseCase,
        _openUseCase = openUseCase,
        _markUseCase = markUseCase,
+       _finishGameUseCase = finishGameUseCase,
        super(GameAreaState.initial()) {
     _init();
   }
@@ -38,6 +42,8 @@ class GameAreaCubit extends Cubit<GameAreaState> {
 
     if (state.field.field[x][y].type == CellType.mine) {
       _goToGameOver();
+    } else if (_finishGameUseCase(state.field)) {
+      _goToGameOver(isWin: true);
     }
   }
 
@@ -62,7 +68,7 @@ class GameAreaCubit extends Cubit<GameAreaState> {
     _navigator.pop();
   }
 
-  void _goToGameOver() {
-    _navigator.goToGameOver();
+  void _goToGameOver({bool isWin = false}) {
+    _navigator.goToGameOver(isWin: isWin);
   }
 }

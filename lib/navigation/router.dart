@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:minesweeper/screens/menu/menu_screen.dart';
 import 'package:minesweeper/screens/game_area/game_area_screen.dart';

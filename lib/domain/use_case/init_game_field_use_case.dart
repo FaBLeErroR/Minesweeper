@@ -60,11 +60,7 @@ class InitGameFieldUseCase {
             final nx = x + dx;
             final ny = y + dy;
 
-            if (nx >= 0 &&
-                ny >= 0 &&
-                nx < width &&
-                ny < height &&
-                field[nx][ny].type == CellType.mine) {
+            if (nx >= 0 && ny >= 0 && nx < width && ny < height && field[nx][ny].type == CellType.mine) {
               count++;
             }
           }
@@ -74,36 +70,21 @@ class InitGameFieldUseCase {
       }
     }
 
-    return GameField(
-      width: width,
-      height: height,
-      field: field,
-      mines: mines,
-      flags: 0,
-    );
+    return GameField(width: width, height: height, field: field, mines: mines, flags: 0);
   }
 
   /// Генерирует форму пещеры через клеточный автомат.
   /// Возвращает grid, где true = стена, false = пустая клетка.
   List<List<bool>> _generateCave(int width, int height, Random random) {
     // Инициализация случайным шумом: каждая клетка с вероятностью 45% - стена.
-    var grid = List.generate(
-      width,
-          (_) => List.generate(
-        height,
-            (_) => random.nextDouble() < _initialWallProbability,
-      ),
-    );
+    var grid = List.generate(width, (_) => List.generate(height, (_) => random.nextDouble() < _initialWallProbability));
 
     // Итерации правила "5/3":
     //   - пустая клетка с >= 5 соседями-стенами становится стеной
     //   - стена с <= 3 соседями-стенами становится пустой
     // Чтение из старого grid, запись в новый - синхронное обновление.
     for (int i = 0; i < _iterations; i++) {
-      final newGrid = List.generate(
-        width,
-            (x) => List.generate(height, (y) => grid[x][y]),
-      );
+      final newGrid = List.generate(width, (x) => List.generate(height, (y) => grid[x][y]));
 
       for (int x = 0; x < width; x++) {
         for (int y = 0; y < height; y++) {
@@ -126,13 +107,7 @@ class InitGameFieldUseCase {
   /// Считает соседей-стен в окрестности Мура (8 клеток вокруг).
   /// Клетки за границей поля считаются стенами - это даёт естественную
   /// "оболочку" из стен по краям и не даёт пещерам вырываться наружу.
-  int _countWallNeighbors(
-      List<List<bool>> grid,
-      int x,
-      int y,
-      int width,
-      int height,
-      ) {
+  int _countWallNeighbors(List<List<bool>> grid, int x, int y, int width, int height) {
     int count = 0;
     for (int dx = -1; dx <= 1; dx++) {
       for (int dy = -1; dy <= 1; dy++) {

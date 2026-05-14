@@ -8,18 +8,21 @@ import 'package:minesweeper/utils/localization_extension.dart';
 
 @RoutePage()
 class GameOverScreen extends StatelessWidget {
-  const GameOverScreen({super.key});
+  final bool isWin;
+
+  const GameOverScreen({super.key, this.isWin = false});
 
   @override
   Widget build(BuildContext context) {
-    return GameOverView(navigator: GetIt.instance<AppNavigator>());
+    return GameOverView(navigator: GetIt.instance<AppNavigator>(), isWin: isWin);
   }
 }
 
 class GameOverView extends StatelessWidget {
   final AppNavigator navigator;
+  final bool isWin;
 
-  const GameOverView({super.key, required this.navigator});
+  const GameOverView({super.key, required this.navigator, required this.isWin});
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +34,10 @@ class GameOverView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: .center,
           children: [
-            Text(localization.gameOver),
-            SizedBox(height: 64),
+            Text(localization.gameOver, style: Theme.of(context).textTheme.headlineLarge),
+            SizedBox(height: 12),
+            Text(isWin ? localization.youWin : localization.youLose, style: Theme.of(context).textTheme.bodyLarge),
+            SizedBox(height: 24),
             Row(
               mainAxisAlignment: .center,
               children: [

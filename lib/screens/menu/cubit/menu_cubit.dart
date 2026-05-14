@@ -1,8 +1,6 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:minesweeper/navigation/app_navigator.dart';
 import 'package:minesweeper/screens/menu/cubit/menu_state.dart';
-import 'package:minesweeper/navigation/router.dart';
 
 class MenuCubit extends Cubit<MenuState> {
   final AppNavigator _navigator;

@@ -15,8 +15,8 @@ class AppNavigator {
     router.replace(MenuScreenRoute());
   }
 
-  void goToGameOver() {
-    router.replace(GameOverScreenRoute());
+  void goToGameOver({bool isWin = false}) {
+    router.replace(GameOverScreenRoute(isWin: isWin));
   }
 
   void pop() {
